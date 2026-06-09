@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mélissa — Une invitation pour le bal</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Raleway:wght@300;400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+--gold: #D4AF6A;
+--gold-light: #F0D080;
+--gold-pale: #FFF8E7;
+--hollywood-red: #6B1A2A;
+--hollywood-bg: #120608;
+--star-bg: #020818;
+--star-blue: #0A1535;
+--cream: #F5EDD6;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+font-family: 'Cormorant Garamond', serif;
+background: #000;
+color: var(--cream);
+overflow-x: hidden;
+}
+
+/* ─── HERO ─── */
+#hero {
+position: relative;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+background: radial-gradient(ellipse at 50% 30%, #3a0a14 0%, #120608 60%, #000 100%);
+overflow: hidden;
+padding: 2rem;
+}
+
+/* Spotlights */
+.spotlight {
+position: absolute;
+top: -80px;
+width: 300px;
+height: 700px;
+background: linear-gradient(180deg, rgba(212,175,106,0.18) 0%, transparent 80%);
+border-radius: 50%;
+transform-origin: top center;
+pointer-events: none;
+filter: blur(18px);
+}
+.spotlight-1 { left: 10%; transform: rotate(-18deg); }
+.spotlight-2 { left: 38%; transform: rotate(0deg); opacity: 0.9; }
+.spotlight-3 { right: 10%; transform: rotate(18deg); }
+
+/* Gold stars particles */
+.star-particle {
+position: absolute;
+width: 3px; height: 3px;
+background: var(--gold-light);
+border-radius: 50%;
+animation: twinkle var(--dur) ease-in-out infinite;
+opacity: 0;
+}
+@keyframes twinkle {
+0%, 100% { opacity: 0; transform: scale(0.5); }
+50% { opacity: 1; transform: scale(1.4); }
+}
+
+.hero-eyebrow {
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+letter-spacing: 0.35em;
+font-size: 0.75rem;
+color: var(--gold);
+text-transform: uppercase;
+margin-bottom: 1.5rem;
+opacity: 0;
+animation: fadeUp 1s 0.3s forwards;
+}
+
+.hero-name {
+font-family: 'Playfair Display', serif;
+font-size: clamp(4rem, 14vw, 9rem);
+font-weight: 700;
+line-height: 0.95;
+background: linear-gradient(135deg, #c8992a 0%, #f0d080 40%, #d4af6a 70%, #a87820 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+opacity: 0;
+animation: fadeUp 1s 0.6s forwards;
+text-shadow: none;
+position: relative;
+}
+
+.hero-name::after {
+content: '';
+display: block;
+width: 80px;
+height: 2px;
+background: var(--gold);
+margin: 1.2rem auto 0;
+opacity: 0.6;
+}
+
+.hero-subtitle {
+font-style: italic;
+font-size: clamp(1rem, 2.5vw, 1.4rem);
+color: rgba(245, 237, 214, 0.75);
+margin-top: 1.5rem;
+font-weight: 300;
+opacity: 0;
+animation: fadeUp 1s 0.9s forwards;
+}
+
+.scroll-cue {
+position: absolute;
+bottom: 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0.4rem;
+opacity: 0;
+animation: fadeUp 1s 1.8s forwards;
+cursor: pointer;
+color: var(--gold);
+font-family: 'Raleway', sans-serif;
+font-size: 0.7rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+}
+.scroll-cue span { display: block; width: 1px; height: 40px; background: var(--gold); margin: 0 auto; animation: scrollLine 1.6s ease-in-out infinite; }
+@keyframes scrollLine { 0%,100%{transform:scaleY(0.3);opacity:0.4} 50%{transform:scaleY(1);opacity:1} }
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(28px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── QUOTE SECTION ─── */
+#quote {
+background: linear-gradient(180deg, var(--hollywood-bg) 0%, #1a0a10 50%, var(--hollywood-bg) 100%);
+padding: 6rem 2rem;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+#quote::before {
+content: '"';
+position: absolute;
+top: -2rem;
+left: 50%;
+transform: translateX(-50%);
+font-family: 'Playfair Display', serif;
+font-size: 18rem;
+color: rgba(212, 175, 106, 0.04);
+line-height: 1;
+pointer-events: none;
+}
+
+.quote-socrate {
+font-style: italic;
+font-size: clamp(0.9rem, 2vw, 1.1rem);
+color: rgba(245,237,214,0.45);
+letter-spacing: 0.05em;
+margin-bottom: 2rem;
+}
+
+.quote-main {
+font-family: 'Playfair Display', serif;
+font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+line-height: 1.6;
+color: var(--cream);
+max-width: 700px;
+margin: 0 auto;
+}
+
+.quote-main em {
+color: var(--gold-light);
+font-style: italic;
+}
+
+.quote-divider {
+width: 60px;
+height: 1px;
+background: var(--gold);
+margin: 2.5rem auto;
+opacity: 0.5;
+}
+
+/* ─── SECTION COMMON ─── */
+.bal-section {
+position: relative;
+min-height: 100vh;
+padding: 5rem 2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+overflow: hidden;
+}
+
+/* ─── BAL 1 — HOLLYWOOD ─── */
+#bal1 {
+background: radial-gradient(ellipse at 50% 0%, #3a0a14 0%, #120608 55%, #000 100%);
+}
+
+/* Red carpet floor effect */
+#bal1::after {
+content: '';
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 180px;
+background: linear-gradient(180deg, transparent, rgba(107,26,42,0.3));
+pointer-events: none;
+}
+
+/* Hollywood stars on floor */
+.hwood-stars {
+position: absolute;
+inset: 0;
+pointer-events: none;
+overflow: hidden;
+}
+.hstar {
+position: absolute;
+color: var(--gold);
+font-size: 1.2rem;
+opacity: 0.07;
+animation: glow var(--d) ease-in-out infinite;
+}
+@keyframes glow { 0%,100%{opacity:0.07} 50%{opacity:0.22} }
+
+/* ─── BAL 2 — NUIT ÉTOILÉE ─── */
+#bal2 {
+background: radial-gradient(ellipse at 50% 100%, #0d1f45 0%, var(--star-blue) 40%, var(--star-bg) 80%);
+}
+
+#bal2 canvas {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+}
+
+/* ─── CARD 3D ─── */
+.card-scene {
+perspective: 1200px;
+margin: 3rem auto;
+width: min(500px, 92vw);
+}
+
+.card {
+position: relative;
+width: 100%;
+padding: 3rem 2.5rem;
+border-radius: 4px;
+transform: rotateX(4deg) rotateY(-3deg);
+transition: transform 0.5s cubic-bezier(.23,1,.32,1), box-shadow 0.5s;
+cursor: default;
+will-change: transform;
+}
+
+.card:hover {
+transform: rotateX(0deg) rotateY(0deg) translateZ(20px);
+}
+
+.card-hollywood {
+background: linear-gradient(145deg, #1c0810 0%, #2a0d16 50%, #1c0810 100%);
+border: 1px solid rgba(212,175,106,0.3);
+box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 80px rgba(107,26,42,0.3), inset 0 1px 0 rgba(212,175,106,0.15);
+}
+
+.card-starnight {
+background: linear-gradient(145deg, #060e25 0%, #0d1f3c 50%, #060e25 100%);
+border: 1px solid rgba(120,160,255,0.2);
+box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 60px rgba(30,80,200,0.2), inset 0 1px 0 rgba(180,210,255,0.1);
+}
+
+.card-date {
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+letter-spacing: 0.3em;
+font-size: 0.72rem;
+text-transform: uppercase;
+margin-bottom: 1.2rem;
+}
+
+.card-hollywood .card-date { color: var(--gold); }
+.card-starnight .card-date { color: #7BAEFF; }
+
+.card-title {
+font-family: 'Playfair Display', serif;
+font-size: clamp(1.6rem, 5vw, 2.4rem);
+margin-bottom: 1.4rem;
+line-height: 1.2;
+}
+
+.card-hollywood .card-title { color: var(--cream); }
+.card-starnight .card-title { color: #D0E4FF; }
+
+.card-body {
+font-size: clamp(1rem, 2.2vw, 1.15rem);
+line-height: 1.8;
+font-weight: 300;
+color: rgba(245,237,214,0.82);
+margin-bottom: 2rem;
+}
+
+.dress-hint {
+font-style: italic;
+color: var(--gold-light);
+}
+
+/* ─── BUTTONS ─── */
+.btn-group {
+display: flex;
+gap: 1.2rem;
+justify-content: center;
+flex-wrap: wrap;
+margin-top: 0.5rem;
+}
+
+.btn {
+font-family: 'Raleway', sans-serif;
+font-weight: 400;
+letter-spacing: 0.18em;
+font-size: 0.82rem;
+text-transform: uppercase;
+padding: 0.9rem 2.4rem;
+border: none;
+cursor: pointer;
+border-radius: 2px;
+position: relative;
+overflow: hidden;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn::before {
+content: '';
+position: absolute;
+inset: 0;
+background: rgba(255,255,255,0.08);
+opacity: 0;
+transition: opacity 0.2s;
+}
+.btn:hover::before { opacity: 1; }
+.btn:active { transform: scale(0.96); }
+
+.btn-yes-h { background: linear-gradient(135deg, #8B1A2C, #6B1A2A); color: var(--gold-light); box-shadow: 0 4px 20px rgba(107,26,42,0.4); }
+.btn-no-h { background: transparent; color: rgba(245,237,214,0.5); border: 1px solid rgba(245,237,214,0.2); }
+
+.btn-yes-s { background: linear-gradient(135deg, #1A3A8B, #0F2460); color: #B8D4FF; box-shadow: 0 4px 20px rgba(26,58,139,0.5); }
+.btn-no-s { background: transparent; color: rgba(200,220,255,0.45); border: 1px solid rgba(200,220,255,0.2); }
+
+.btn-yes-h:hover { box-shadow: 0 6px 30px rgba(212,175,106,0.35), 0 0 40px rgba(212,175,106,0.15); transform: translateY(-2px); }
+.btn-yes-s:hover { box-shadow: 0 6px 30px rgba(100,160,255,0.3), 0 0 40px rgba(100,160,255,0.15); transform: translateY(-2px); }
+
+/* ─── RESPONSE OVERLAYS ─── */
+.response-overlay {
+display: none;
+position: fixed;
+inset: 0;
+z-index: 999;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+text-align: center;
+padding: 2rem;
+animation: overlayIn 0.5s cubic-bezier(.23,1,.32,1);
+}
+
+.response-overlay.active { display: flex; }
+
+@keyframes overlayIn {
+from { opacity: 0; transform: scale(0.95); }
+to { opacity: 1; transform: scale(1); }
+}
+
+.overlay-yes-h {
+background: radial-gradient(ellipse at 50% 30%, #3a0a14 0%, #120608 70%);
+}
+
+.overlay-yes-s {
+background: radial-gradient(ellipse at 50% 60%, #0d1f45 0%, var(--star-bg) 70%);
+}
+
+.overlay-no {
+background: #0a0a0a;
+}
+
+.overlay-title {
+font-family: 'Playfair Display', serif;
+font-size: clamp(2rem, 7vw, 4rem);
+margin-bottom: 1rem;
+}
+
+.overlay-yes-h .overlay-title { color: var(--gold-light); }
+.overlay-yes-s .overlay-title { color: #B8D4FF; }
+.overlay-no .overlay-title { color: #555; }
+
+.overlay-msg {
+font-size: clamp(1rem, 2.5vw, 1.3rem);
+max-width: 500px;
+font-style: italic;
+line-height: 1.8;
+color: rgba(245,237,214,0.75);
+margin-bottom: 2rem;
+}
+
+.overlay-close {
+font-family: 'Raleway', sans-serif;
+font-size: 0.75rem;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: rgba(245,237,214,0.35);
+background: none;
+border: none;
+cursor: pointer;
+margin-top: 1rem;
+text-decoration: underline;
+text-underline-offset: 4px;
+transition: color 0.2s;
+}
+.overlay-close:hover { color: rgba(245,237,214,0.7); }
+
+/* ─── CONFETTI ─── */
+#confetti-canvas {
+position: fixed;
+inset: 0;
+pointer-events: none;
+z-index: 1000;
+display: none;
+}
+
+/* ─── FOOTER ─── */
+footer {
+background: #000;
+padding: 3rem 2rem;
+text-align: center;
+border-top: 1px solid rgba(212,175,106,0.1);
+}
+footer p {
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+font-size: 0.75rem;
+letter-spacing: 0.15em;
+color: rgba(245,237,214,0.25);
+text-transform: uppercase;
+}
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+letter-spacing: 0.4em;
+font-size: 0.68rem;
+text-transform: uppercase;
+margin-bottom: 0.5rem;
+opacity: 0.5;
+}
+
+.section-label-h { color: var(--gold); }
+.section-label-s { color: #7BAEFF; }
+
+.section-heading {
+font-family: 'Playfair Display', serif;
+font-size: clamp(2rem, 6vw, 3.5rem);
+margin-bottom: 0.5rem;
+line-height: 1.15;
+}
+
+.section-heading-h { color: var(--cream); }
+.section-heading-s { color: #D0E4FF; }
+
+/* ─── DRESS GLOW ─── */
+.dress-icon {
+font-size: 4rem;
+display: block;
+margin: 1.5rem auto 0.5rem;
+animation: dressGlow 3s ease-in-out infinite;
+filter: drop-shadow(0 0 12px rgba(212,175,106,0.5));
+}
+
+@keyframes dressGlow {
+0%, 100% { filter: drop-shadow(0 0 8px rgba(212,175,106,0.3)); transform: translateY(0); }
+50% { filter: drop-shadow(0 0 24px rgba(212,175,106,0.8)); transform: translateY(-6px); }
+}
+
+/* ─── SHOOTING STARS ─── */
+.shooting-star {
+position: absolute;
+width: 2px;
+height: 2px;
+background: white;
+border-radius: 50%;
+animation: shoot var(--d) linear var(--delay) infinite;
+opacity: 0;
+pointer-events: none;
+}
+
+@keyframes shoot {
+0% { opacity: 0; transform: translate(0,0) rotate(215deg) scaleX(1); }
+5% { opacity: 1; }
+20% { opacity: 0; transform: translate(300px, 300px) rotate(215deg) scaleX(40); }
+100% { opacity: 0; }
+}
+
+/* Scroll reveal */
+.reveal {
+opacity: 0;
+transform: translateY(40px);
+transition: opacity 0.8s cubic-bezier(.23,1,.32,1), transform 0.8s cubic-bezier(.23,1,.32,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section id="hero">
+<div class="spotlight spotlight-1"></div>
+<div class="spotlight spotlight-2"></div>
+<div class="spotlight spotlight-3"></div>
+<div id="hero-particles"></div>
+
+<p class="hero-eyebrow">Une invitation pour le bal de rhéto</p>
+<h1 class="hero-name">Mélissa</h1>
+<p class="hero-subtitle">Deux bals. Une question.</p>
+
+<div class="scroll-cue" onclick="document.getElementById('quote').scrollIntoView({behavior:'smooth'})">
+Découvrir
+<span></span>
+</div>
+</section>
+
+<!-- ═══════════════════════════ QUOTE ═══════════════════════════ -->
+<section id="quote">
+<div class="reveal">
+<p class="quote-socrate">Socrate disait : « La seule chose que je sais, c'est que je ne sais rien. »</p>
+<div class="quote-divider"></div>
+<p class="quote-main">
+Mais moi, la seule chose que je sais,<br>
+c'est que <em>sans toi, au bal, je ne suis rien.</em>
+</p>
+</div>
+</section>
+
+<!-- ═══════════════════════════ BAL 1 — HOLLYWOOD ═══════════════════════════ -->
+<section id="bal1" class="bal-section">
+<div class="hwood-stars" id="hwood-stars"></div>
+
+<div class="reveal">
+<p class="section-label section-label-h">Bal des Ursulines &mdash; 25 juin</p>
+<h2 class="section-heading section-heading-h">Une soirée Hollywood</h2>
+</div>
+
+<div class="card-scene reveal" style="transition-delay:0.15s">
+<div class="card card-hollywood" id="card1">
+<span class="dress-icon">👗</span>
+<p class="card-date">Mercredi 25 juin &bull; Bal des Ursulines</p>
+<h3 class="card-title">Aurais-tu l'honneur de me laisser découvrir ta robe dorée ?</h3>
+<p class="card-body">
+Ce soir-là, les projecteurs s'allument sur toi.<br>
+<span class="dress-hint">Ta robe dorée, ce bal, ce moment</span> — <br>
+j'ai hâte d'être là, à tes côtés.
+</p>
+<p class="card-body" style="font-size:1.05rem; margin-bottom: 1.5rem;">
+M'accompagneras-tu pour cette nuit hollywoodienne ?
+</p>
+<div class="btn-group">
+<button class="btn btn-yes-h" onclick="showYes('h')">✦ Oui, avec plaisir</button>
+<button class="btn btn-no-h" onclick="showNo()">Non, merci</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══════════════════════════ BAL 2 — NUIT ÉTOILÉE ═══════════════════════════ -->
+<section id="bal2" class="bal-section">
+<canvas id="stars-canvas"></canvas>
+
+<div class="reveal">
+<p class="section-label section-label-s">Bal de Saint-Stan &mdash; 26 juin</p>
+<h2 class="section-heading section-heading-s">Sous les étoiles</h2>
+</div>
+
+<div class="card-scene reveal" style="transition-delay:0.15s">
+<div class="card card-starnight" id="card2">
+<span class="dress-icon" style="filter:drop-shadow(0 0 12px rgba(100,160,255,0.5));animation-name:dressGlowBlue">👗</span>
+<p class="card-date">Jeudi 26 juin &bull; Bal de Saint-Stanislas</p>
+<h3 class="card-title" style="color:#D0E4FF">Sous un ciel étoilé, m'accorderas-tu cette danse ?</h3>
+<p class="card-body" style="color:rgba(200,220,255,0.8)">
+La nuit du 26 promet d'être magique.<br>
+<span style="color:#7BAEFF;font-style:italic">Ta robe dorée brillera plus que les étoiles</span> —<br>
+et j'espère être là pour le voir.
+</p>
+<p class="card-body" style="font-size:1.05rem; margin-bottom: 1.5rem; color:rgba(200,220,255,0.8)">
+M'accompagneras-tu pour cette nuit étoilée ?
+</p>
+<div class="btn-group">
+<button class="btn btn-yes-s" onclick="showYes('s')">✦ Oui, je veux bien</button>
+<button class="btn btn-no-s" onclick="showNo()">Non, merci</button>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<p>Bal de rhéto 2025 &nbsp;&bull;&nbsp; Une invitation de tout cœur</p>
+</footer>
+
+<!-- ─── OVERLAYS ─── -->
+<div id="overlay-yes-h" class="response-overlay overlay-yes-h">
+<div id="overlay-h-inner">
+<p class="overlay-title">✦ Oui !</p>
+<p class="overlay-msg">Le 25 juin, sous les projecteurs hollywoodiens, ta robe dorée sera la plus belle. Je serai là, heureux à tes côtés.</p>
+<button class="overlay-close" onclick="closeOverlay('overlay-yes-h')">Retour</button>
+</div>
+</div>
+
+<div id="overlay-yes-s" class="response-overlay overlay-yes-s">
+<div>
+<p class="overlay-title">✦ Merci !</p>
+<p class="overlay-msg">Le 26 juin, sous les étoiles de Saint-Stan, ce bal sera un souvenir inoubliable. À bientôt !</p>
+<button class="overlay-close" onclick="closeOverlay('overlay-yes-s')">Retour</button>
+</div>
+</div>
+
+<div id="overlay-no" class="response-overlay overlay-no">
+<div>
+<p class="overlay-title" style="color:#555">Oh…</p>
+<p class="overlay-msg" style="color:rgba(245,237,214,0.3)">Pas de problème. L'invitation reste là, au cas où tu changerais d'avis.</p>
+<button class="overlay-close" onclick="closeOverlay('overlay-no')">Retour</button>
+</div>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+/* ─── HERO PARTICLES ─── */
+(function(){
+const c = document.getElementById('hero-particles');
+for(let i=0;i<60;i++){
+const s = document.createElement('div');
+s.className = 'star-particle';
+s.style.cssText = `
+left:${Math.random()*100}%;
+top:${Math.random()*100}%;
+--dur:${2+Math.random()*4}s;
+animation-delay:${Math.random()*5}s;
+`;
+c.appendChild(s);
+}
+})();
+
+/* ─── HOLLYWOOD STARS ─── */
+(function(){
+const c = document.getElementById('hwood-stars');
+for(let i=0;i<18;i++){
+const s = document.createElement('div');
+s.className = 'hstar';
+s.textContent = '★';
+s.style.cssText = `
+left:${Math.random()*100}%;
+top:${Math.random()*100}%;
+--d:${3+Math.random()*4}s;
+animation-delay:${Math.random()*4}s;
+font-size:${0.8+Math.random()*1.5}rem;
+`;
+c.appendChild(s);
+}
+})();
+
+/* ─── STARRY NIGHT CANVAS ─── */
+(function(){
+const canvas = document.getElementById('stars-canvas');
+const ctx = canvas.getContext('2d');
+let stars = [], shooting = [];
+
+function resize(){
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+initStars();
+}
+
+function initStars(){
+stars = [];
+for(let i=0;i<220;i++){
+stars.push({
+x: Math.random()*canvas.width,
+y: Math.random()*canvas.height,
+r: Math.random()*1.4+0.3,
+a: Math.random(),
+da: (Math.random()-0.5)*0.008,
+});
+}
+}
+
+function addShoot(){
+if(shooting.length < 3){
+shooting.push({
+x: Math.random()*canvas.width*0.7,
+y: Math.random()*canvas.height*0.4,
+len: 120+Math.random()*80,
+speed: 8+Math.random()*6,
+a: 1,
+dx: 4+Math.random()*3,
+dy: 3+Math.random()*2,
+});
+}
+}
+
+setInterval(addShoot, 2400);
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+stars.forEach(s=>{
+s.a += s.da;
+if(s.a>1||s.a<0.1) s.da*=-1;
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fillStyle = `rgba(200,220,255,${s.a})`;
+ctx.fill();
+});
+shooting = shooting.filter(s=>{
+s.x += s.dx; s.y += s.dy; s.a -= 0.018;
+if(s.a<=0) return false;
+const grd = ctx.createLinearGradient(s.x,s.y,s.x-s.dx*s.len/s.speed,s.y-s.dy*s.len/s.speed);
+grd.addColorStop(0,`rgba(255,255,255,${s.a})`);
+grd.addColorStop(1,'rgba(255,255,255,0)');
+ctx.beginPath();
+ctx.moveTo(s.x,s.y);
+ctx.lineTo(s.x-s.dx*s.len/s.speed, s.y-s.dy*s.len/s.speed);
+ctx.strokeStyle = grd;
+ctx.lineWidth = 1.5;
+ctx.stroke();
+return true;
+});
+requestAnimationFrame(draw);
+}
+
+window.addEventListener('resize', resize);
+resize();
+draw();
+})();
+
+/* ─── 3D CARD MOUSE TILT ─── */
+document.querySelectorAll('.card').forEach(card=>{
+card.parentElement.addEventListener('mousemove', e=>{
+const rect = card.getBoundingClientRect();
+const cx = rect.left + rect.width/2;
+const cy = rect.top + rect.height/2;
+const dx = (e.clientX - cx) / (rect.width/2);
+const dy = (e.clientY - cy) / (rect.height/2);
+card.style.transform = `rotateX(${-dy*8}deg) rotateY(${dx*10}deg) translateZ(20px)`;
+});
+card.parentElement.addEventListener('mouseleave', ()=>{
+card.style.transform = 'rotateX(4deg) rotateY(-3deg)';
+});
+});
+
+/* ─── CONFETTI ─── */
+function launchConfetti(color1, color2){
+const canvas = document.getElementById('confetti-canvas');
+canvas.style.display = 'block';
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const ctx = canvas.getContext('2d');
+const pieces = [];
+const colors = [color1, color2, '#fff', '#FFD700', '#FFF5CC'];
+
+for(let i=0;i<200;i++){
+pieces.push({
+x: Math.random()*canvas.width,
+y: Math.random()*canvas.height - canvas.height,
+w: 8+Math.random()*8,
+h: 4+Math.random()*6,
+color: colors[Math.floor(Math.random()*colors.length)],
+rot: Math.random()*360,
+vx: (Math.random()-0.5)*4,
+vy: 2+Math.random()*4,
+vr: (Math.random()-0.5)*6,
+a: 1,
+});
+}
+
+let frame = 0;
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+pieces.forEach(p=>{
+p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+if(frame > 80) p.a -= 0.01;
+ctx.save();
+ctx.translate(p.x, p.y);
+ctx.rotate(p.rot*Math.PI/180);
+ctx.globalAlpha = Math.max(0, p.a);
+ctx.fillStyle = p.color;
+ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+ctx.restore();
+});
+frame++;
+if(frame < 160) requestAnimationFrame(animate);
+else canvas.style.display = 'none';
+}
+animate();
+}
+
+/* ─── RESPONSES ─── */
+function showYes(bal){
+if(bal === 'h'){
+document.getElementById('overlay-yes-h').classList.add('active');
+launchConfetti('#D4AF6A', '#8B1A2C');
+} else {
+document.getElementById('overlay-yes-s').classList.add('active');
+launchConfetti('#1A3A8B', '#7BAEFF');
+}
+}
+
+function showNo(){
+document.getElementById('overlay-no').classList.add('active');
+// Shake effect on cards
+document.querySelectorAll('.card').forEach(c=>{
+c.style.animation = 'shake 0.4s ease';
+setTimeout(()=>c.style.animation='',500);
+});
+}
+
+function closeOverlay(id){
+document.getElementById(id).classList.remove('active');
+}
+
+// Shake keyframes
+const style = document.createElement('style');
+style.textContent = `@keyframes shake {
+0%,100%{transform:rotateX(4deg) rotateY(-3deg)}
+20%{transform:rotateX(4deg) rotateY(-3deg) translateX(-8px)}
+40%{transform:rotateX(4deg) rotateY(-3deg) translateX(8px)}
+60%{transform:rotateX(4deg) rotateY(-3deg) translateX(-5px)}
+80%{transform:rotateX(4deg) rotateY(-3deg) translateX(5px)}
+}
+@keyframes dressGlowBlue {
+0%,100%{filter:drop-shadow(0 0 8px rgba(100,160,255,0.3));transform:translateY(0)}
+50%{filter:drop-shadow(0 0 24px rgba(100,160,255,0.8));transform:translateY(-6px)}
+}`;
+document.head.appendChild(style);
+
+/* ─── SCROLL REVEAL ─── */
+const obs = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting) e.target.classList.add('visible');
+});
+},{threshold:0.15});
+
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
